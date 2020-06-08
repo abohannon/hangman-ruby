@@ -1,10 +1,9 @@
 module Hangman
   class Game
-
-    attr_reader :words
+    attr_reader :word
 
     def initialize
-      @words = File.read("5desk.txt").split()
+      @word = File.read("5desk.txt").split().sample
     end
   end
 end
