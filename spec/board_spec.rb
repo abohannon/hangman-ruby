@@ -15,7 +15,17 @@ module Hangman
 
     context "#create_guess_display" do
       it "creates a blank guess" do
-        expect(board.guess).to eq("_ _ _ _ _")
+        expect(board.current_guess).to eq(["_", "_", "_", "_", "_"])
+      end
+    end
+
+    context "#get_guess" do
+      it "compares player guess to word and updates current guess state" do
+        board.get_guess('h')
+        board.get_guess('e')
+        board.get_guess('o')
+        expect(board.current_guess).to eq(["h", "e", "_", "_", "o"])
+        board.display_board
       end
     end
   end

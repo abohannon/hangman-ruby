@@ -1,14 +1,17 @@
 module Hangman
   class Board
-    attr_accessor :display, :turn, :guess
+    attr_accessor :display_board, :turn, :current_guess
+    attr_reader :word
 
     def initialize(word)
+      @word = word
       @turn = [" ", " ", " ", " ", " ", " "]
-      @guess = create_guess_display(word)
+      @current_guess = create_default_guess(word)
     end
 
-    def create_guess_display(word)
-      Array.new(word.length, "_").join(" ")
+    def get_guess(player_guess = gets.chomp)
+      index = word.index(player_guess)
+      current_guess[index] = player_guess unless !index
     end
 
     def display_board
@@ -21,8 +24,14 @@ module Hangman
       puts "|\\"
       puts "-------"
       puts
-      puts "#{guess}"
+      puts "#{current_guess.join(" ")}"
       puts
+    end
+
+    private
+
+    def create_default_guess(word)
+      Array.new(word.length, '_')
     end
   end
 end

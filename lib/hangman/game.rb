@@ -3,7 +3,13 @@ module Hangman
     attr_reader :word
 
     def initialize
-      @word = File.read("5desk.txt").split().sample
+      @word = get_words_list_and_select_random_word
+    end
+
+    private
+
+    def get_words_list_and_select_random_word
+      File.read("5desk.txt").split().sample.downcase
     end
   end
 end
