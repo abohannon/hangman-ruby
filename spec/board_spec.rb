@@ -33,14 +33,6 @@ module Hangman
         expect(board.mistakes[0]).to eq('O')
         expect(board.mistakes[1]).to eq('|')
       end
-
-      it "calls game_over if mistake_count is 6" do
-        expect(board).to receive(:game_over)
-
-        6.times do
-          board.get_guess('x')
-        end
-      end
     end
   end
 end

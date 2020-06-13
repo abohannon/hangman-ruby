@@ -1,6 +1,6 @@
 module Hangman
   class Board
-    attr_accessor :current_guess, :mistakes
+    attr_accessor :current_guess, :mistakes, :mistake_count
     attr_reader :word
 
     def initialize(word)
@@ -8,19 +8,16 @@ module Hangman
       @current_guess = create_default_guess(word)
       @mistakes = Array.new(6, " ")
       @mistake_count = 0
+      #TODO: Add array of guessed letters
     end
 
     def get_guess(player_guess = gets.chomp)
       index = word.index(player_guess)
 
       if index
-        current_guess[index] = player_guess
+        correct_guess(player_guess, index)
       else
         wrong_guess
-      end
-
-      if @mistake_count == 6
-        game_over
       end
     end
 
@@ -44,17 +41,22 @@ module Hangman
       Array.new(word.length, '_')
     end
 
+    def correct_guess(player_guess, index)
+      puts
+      puts "Nice guess!"
+      puts
+
+      current_guess[index] = player_guess
+    end
+
     def wrong_guess
+      puts
+      puts "Sorry. Wrong guess."
+      puts
+
       characters = ['O', '|', '-', '-', '/', '\\']
       mistakes[@mistake_count] = characters[@mistake_count]
       @mistake_count += 1
-    end
-
-    def game_over
-      puts
-      puts "Bummer! You didn't guess correctly. The word was: #{word}. Better luck next time."
-      puts
-      return
     end
   end
 end
