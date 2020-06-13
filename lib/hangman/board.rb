@@ -8,6 +8,7 @@ module Hangman
       @current_guess = create_default_guess(word)
       @mistakes = Array.new(6, " ")
       @mistake_count = 0
+      @guessed_letters = []
       #TODO: Add array of guessed letters
     end
 
@@ -17,7 +18,7 @@ module Hangman
       if index
         correct_guess(player_guess, index)
       else
-        wrong_guess
+        wrong_guess(player_guess)
       end
     end
 
@@ -33,6 +34,8 @@ module Hangman
       puts
       puts "#{current_guess.join(" ")}"
       puts
+      puts "Guessed: #{@guessed_letters}"
+      puts
     end
 
     private
@@ -45,11 +48,11 @@ module Hangman
       puts
       puts "Nice guess!"
       puts
-
+      #TODO: fix to update multiple indexes if the letter occurs more than once
       current_guess[index] = player_guess
     end
 
-    def wrong_guess
+    def wrong_guess(player_guess)
       puts
       puts "Sorry. Wrong guess."
       puts
@@ -57,6 +60,7 @@ module Hangman
       characters = ['O', '|', '-', '-', '/', '\\']
       mistakes[@mistake_count] = characters[@mistake_count]
       @mistake_count += 1
+      @guessed_letters << player_guess
     end
   end
 end
