@@ -6,10 +6,9 @@ module Hangman
     let (:board) { Board.new("hello") }
 
     context "#initialize" do
-      it "initializes a @turn and @guess array " do
-        expect(board.turn).to be_a(Array)
-        expect(board.turn.length).to eq(6)
-
+      it "initializes a @mistakes array" do
+        expect(board.mistakes).to be_a(Array)
+        expect(board.mistakes.length).to eq(6)
       end
     end
 
@@ -25,7 +24,22 @@ module Hangman
         board.get_guess('e')
         board.get_guess('o')
         expect(board.current_guess).to eq(["h", "e", "_", "_", "o"])
-        board.display_board
+      end
+
+      it "adds characters to the mistakes array when there's a wrong guess" do
+        board.get_guess('z')
+        board.get_guess('x')
+
+        expect(board.mistakes[0]).to eq('O')
+        expect(board.mistakes[1]).to eq('|')
+      end
+
+      it "calls game_over if mistake_count is 6" do
+        expect(board).to receive(:game_over)
+
+        6.times do
+          board.get_guess('x')
+        end
       end
     end
   end
