@@ -22,8 +22,8 @@ module Hangman
       it "compares player guess to word and updates current guess state" do
         board.get_guess('h')
         board.get_guess('e')
-        board.get_guess('o')
-        expect(board.current_guess).to eq(["h", "e", "_", "_", "o"])
+        board.get_guess('l')
+        expect(board.current_guess).to eq(["h", "e", "l", "l", "_"])
       end
 
       it "adds characters to the mistakes array when there's a wrong guess" do

@@ -9,16 +9,15 @@ module Hangman
       @mistakes = Array.new(6, " ")
       @mistake_count = 0
       @guessed_letters = []
-      #TODO: Add array of guessed letters
     end
 
     def get_guess(player_guess = gets.chomp)
-      index = word.index(player_guess)
+      indexes = word.size.times.select { |i| word[i] == player_guess }
 
-      if index
-        correct_guess(player_guess, index)
-      else
+      if indexes.empty?
         wrong_guess(player_guess)
+      else
+        correct_guess(player_guess, indexes)
       end
     end
 
@@ -44,12 +43,12 @@ module Hangman
       Array.new(word.length, '_')
     end
 
-    def correct_guess(player_guess, index)
+    def correct_guess(player_guess, indexes)
       puts
       puts "Nice guess!"
       puts
-      #TODO: fix to update multiple indexes if the letter occurs more than once
-      current_guess[index] = player_guess
+
+      indexes.each { |i| current_guess[i] = player_guess }
     end
 
     def wrong_guess(player_guess)

@@ -14,9 +14,17 @@ module Hangman
 
       while true do
         board.display_board
+
         print "Guess a letter: "
         board.get_guess
-        return game_over if board.mistake_count == 6
+
+        if board.mistake_count == 6
+          board.display_board
+          return lose
+        elsif !board.current_guess.include?('_')
+          board.display_board
+          return win
+        end
       end
     end
 
@@ -26,11 +34,16 @@ module Hangman
       File.read("5desk.txt").split().sample.downcase
     end
 
-    def game_over
+    def win
+      puts
+      puts "Congrats! You guessed the correct word!"
+      puts
+    end
+
+    def lose
       puts
       puts "Bummer! You didn't guess correctly. The word was: #{word}. Better luck next time."
       puts
-      return
     end
   end
 end
