@@ -14,5 +14,11 @@ module Hangman
         expect(game.word).to eq(game.word.downcase)
       end
     end
+
+    context "#save" do
+      it "serializes the game class" do
+        expect(game.save).to be_a(String)
+      end
+    end
   end
 end

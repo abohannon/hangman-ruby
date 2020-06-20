@@ -1,0 +1,5 @@
+o:Hangman::Game:
+@wordI"
+silty:ET:@boardo:Hangman::Board
+;@:@current_guess[
+I"_;TI"i;T@	@	@	:@mistakes[I"O;TI"|;TI" ;T@@@:@mistake_counti:@guessed_letters[I"a;TI"e;T

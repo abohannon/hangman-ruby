@@ -11,7 +11,7 @@ module Hangman
       @guessed_letters = []
     end
 
-    def get_guess(player_guess = gets.chomp)
+    def get_guess(player_guess)
       indexes = word.size.times.select { |i| word[i] == player_guess }
 
       if indexes.empty?
